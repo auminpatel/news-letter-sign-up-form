@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Newsletter Sign-up</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Roboto";
+        background-color: hsl(235, 18%, 26%);
+      }
+      .signUpForm {
+        border: 1px solid;
+        border-radius: 25px;
+        margin: 175px 320px;
+        display: flex;
+        /* width: 60%; */
+        padding: 20px;
+        background-color: white;
+      }
+      .form {
+        width: 60%;
+        padding: 60px 80px;
+      }
+      .signUpImg {
+        padding: 30px;
+      }
+      .formTitle,
+      .signUpSuccessTitle {
+        font-size: xxx-large;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+      .formHightlights {
+        padding: 15px 0;
+      }
+      .formHightlights div {
+        padding: 5px 0;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+      .emailWrapper {
+        display: flex;
+        font-size: 14px;
+        margin: 5px 0;
+      }
+      .emailLabel {
+        flex: 1;
+      }
+      .emailInput {
+        padding: 12px;
+        border: 1px solid grey;
+        border-radius: 6px;
+        margin: 10px 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .emailInputErrorDisplay {
+        display: none;
+      }
+
+      .emailInputError {
+        color: hsl(4, 100%, 67%);
+      }
+
+      .subscribeButton:hover,
+      .dissmissButton:hover {
+        background-image: linear-gradient(90deg, red, orange);
+      }
+      .subscribeButton,
+      .dissmissButton {
+        font-size: 16px;
+        width: 100%;
+        padding: 10px 0;
+        background-color: hsl(235, 18%, 26%);
+        color: white;
+        border: 0;
+        border-radius: 6px;
+      }
+      .signUpSuccessContainer {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        margin: 300px;
+      }
+      .signUpSuccess {
+        background-color: white;
+        width: 350px;
+        padding: 70px;
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="signUpForm">
+        <div class="form">
+          <p class="formTitle">Stay updated!</p>
+          <p>Join 60,000+ product managers receiving monthly updates on:</p>
+          <div class="formHightlights">
+            <div>
+              <img src="./assets/images/icon-list.svg" /><span
+                >Product discovery and building what matters</span
+              >
+            </div>
+            <div>
+              <img src="./assets/images/icon-list.svg" /><span>
+                Measuring to ensure updates are a success</span
+              >
+            </div>
+            <div>
+              <img src="./assets/images/icon-list.svg" /><span
+                >And much more!</span
+              >
+            </div>
+          </div>
+          <form>
+            <div class="emailWrapper">
+              <label class="emailLabel" for="emailInput">Email Address </label>
+              <span class="emailInputError emailInputErrorDisplay"
+                >Valid Email Required</span
+              >
+            </div>
+            <input
+              class="emailInput"
+              type="email"
+              placeholder="email@company"
+              name="emailInput"
+            />
+
+            <button class="subscribeButton">
+              Subscribe to monthly newsletter
+            </button>
+          </form>
+        </div>
+        <div class="signUpImg">
+          <div>
+            <img src="./assets/images/illustration-sign-up-desktop.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="signUpSuccessContainer">
+        <div class="signUpSuccess">
+          <img src="./assets/images/icon-success.svg" />
+          <div class="signUpSuccessTitle">Thanks for subscribing!</div>
+
+          <p class="successMessage">
+            A confirmation email has been sent to <b></b> Please open it and
+            click the button inside to confirm your subscription.
+          </p>
+          <button class="dissmissButton">Dismiss message</button>
+        </div>
+      </div>
+    </main>
+    <script>
+      const subscribeButtonElement = document.querySelector(".subscribeButton");
+      const emailInput = document.querySelector(".emailInput");
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      const emailErrorElement = document.querySelector(".emailInputError");
+      const signUpSuccess = document.querySelector(".signUpSuccessContainer");
+      const signUpForm = document.querySelector(".signUpForm");
+      const successMessageEmailElement =
+        document.querySelector(".successMessage b");
+
+      console.log(signUpSuccess)
+      subscribeButtonElement.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        if (emailPattern.test(emailInput.value)) {
+          signUpForm.style.display = "none";
+          signUpSuccess.style.display = "flex";
+
+          emailErrorElement.style.display = "none";
+          console.log(successMessageEmailElement);
+          successMessageEmailElement.innerHTML = emailInput.value;
+        } else {
+          emailErrorElement.style.display = "block";
+        }
+      });
+
+      const dissmissButton = document.querySelector(".dissmissButton");
+      dissmissButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        signUpForm.style.display = "flex";
+        signUpSuccess.style.display = 'none';
+        emailInput.value = "";
+      });
+    </script>
+  </body>
+</html>
